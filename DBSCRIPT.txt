@@ -1,0 +1,60 @@
+
+Create table tblUser(    
+    UserId int IDENTITY(1,1) NOT NULL,    
+    UserName varchar(20) NOT NULL,    
+    UserMob int NOT NULL,    
+    UserEmail varchar(20) NOT NULL   
+)
+
+
+
+
+Create table tblCategory(    
+    CategoryId int IDENTITY(1,1) NOT NULL,    
+    CategoryName varchar(20) NOT NULL,    
+    CategoryDiscrip int NOT NULL,    
+    insertdate datetime,
+	Updatedate datetime   
+)
+
+
+Create table tblProduct(    
+    ProductId int IDENTITY(1,1) NOT NULL,    
+    ProductName varchar(20) NOT NULL,    
+    ProductDiscrip varchar(20) NOT NULL,    
+    ProductPrice int NOT NULL,
+	Productimg  VARBINARY(max), 
+	CategoryId int,
+	PRIMARY KEY (ProductId),
+	CONSTRAINT FK_PersonOrder FOREIGN KEY (CategoryId)
+    REFERENCES tblCategory(CategoryId),
+	 insertdate datetime,
+	Updatedate datetime 
+	 
+)
+
+
+Create table tblOrders(    
+    OrderId int IDENTITY(1,1) NOT NULL,
+	PRIMARY KEY (OrderId),  
+	 ProductId int,
+	 CategoryId int, 
+	 UserId  int,
+	 Purchasedate datetime,
+	 Canceldate datetime 
+	   
+  
+)
+
+
+
+Create procedure spGetAllProducts    
+as    
+Begin    
+    select *    
+    from tblProduct 
+    order by ProductId    
+End
+
+
+
